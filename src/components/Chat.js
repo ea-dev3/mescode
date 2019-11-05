@@ -4,12 +4,34 @@ import Moment from "react-moment";
 // Chatkit
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
+// Material-ui
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
+
 // Assets
 import defaultAvatar from "../assets/default-avatar.png";
+
+const useStyles = makeStyles(theme => ({
+	container: {
+		display: "flex",
+		flexWrap: "wrap"
+	},
+	textField: {
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
+		width: "100%"
+	},
+	button: {
+		margin: theme.spacing(1)
+	}
+}));
 
 function Chat(props) {
 	const [pendingMessage, setPendingMessage] = useState("");
 	const messageList = React.createRef();
+	const classes = useStyles();
 
 	const handleMessageKeyDown = event => {
 		if (event.key === "Enter") {
@@ -68,17 +90,27 @@ function Chat(props) {
 				))}
 			</div>
 			<div className="Chat__compose">
-				<input
-					className="Chat__compose__input"
-					type="text"
+				<TextField
+					id="filled-multiline-flexible"
+					label=""
+					multiline
+					rowsMax="2"
 					placeholder="Type a message..."
 					value={pendingMessage}
 					onChange={handleMessageChange}
 					onKeyDown={handleMessageKeyDown}
+					className={classes.textField}
+					margin="normal"
+					variant="filled"
 				/>
-				<button className="Chat__compose__button" onClick={handleSendMessage}>
+				<Button
+					variant="outlined"
+					color=""
+					className={classes.button}
+					endIcon={<Icon>send</Icon>}
+					onClick={handleSendMessage}>
 					Send
-				</button>
+				</Button>
 			</div>
 		</div>
 	);
