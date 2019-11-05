@@ -1,22 +1,312 @@
+body {
+	background: #eee;
+}
+
 .App {
-  text-align: center;
+	display: flex;
+	justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.App__backdrop {
+	position: absolute;
+	height: 180px;
+	width: 100%;
+	background: #001a33;
+	z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App__backdrop__logo {
+	height: 30px;
+	margin: 1rem;
 }
 
-.App-link {
-  color: #09d3ac;
+.App__chatwindow {
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+	border: 1px solid #d0d0d0;
+	display: flex;
+	margin-top: 40px;
+	width: 70%;
+	height: 800px;
+}
+
+@media only screen and (max-width: 900px) {
+	.App__chatwindow {
+		margin-top: 0;
+		width: 100%;
+		height: 100vh;
+	}
+}
+
+/* Chat */
+.Chat {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.Chat__titlebar {
+	display: flex;
+	align-items: center;
+	background: #ededed;
+	padding: 0rem 0.5rem;
+	height: 4rem;
+}
+
+.Chat__titlebar__avatar {
+	width: 3rem;
+	border-radius: 1.5rem;
+	margin-right: 1rem;
+}
+
+.Chat__titlebar__details {
+	display: flex;
+	flex-direction: column;
+}
+
+.Chat__titlebar__details__presence {
+	font-size: 0.8em;
+	opacity: 0.5;
+	margin-top: 0.2rem;
+}
+
+.Chat__messages {
+	background-image: linear-gradient(#d3d3d3, #d0d0d0);
+	flex: 1;
+	padding: 2rem 4rem;
+	overflow-y: scroll;
+}
+
+.Chat__messages__message__wrapper {
+	display: flex;
+}
+
+.Chat__messages__message__wrapper--other {
+	justify-content: flex-start;
+}
+
+.Chat__messages__message__wrapper--self {
+	justify-content: flex-end;
+}
+
+.Chat__messages__message__wrapper__inner {
+	margin-bottom: 1rem;
+}
+
+.Chat__messages__message {
+	border-radius: 0.5rem;
+	padding: 1rem;
+	padding-bottom: 0.5rem;
+	min-width: 300px;
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+	display: block;
+	position: relative;
+}
+
+.Chat__messages__message__seen {
+	text-align: right;
+	padding-top: 0.2rem;
+	padding-right: 0.5rem;
+	font-size: 0.9rem;
+	opacity: 0.7;
+}
+
+.Chat__messages__message__arrow {
+	position: absolute;
+	width: 0;
+	bottom: 42px;
+	left: -16px;
+	height: 0;
+}
+
+.Chat__messages__message__arrow.alt {
+	right: -2px;
+	bottom: 40px;
+	left: auto;
+}
+
+.Chat__messages__message__arrow:after {
+	content: "";
+	position: absolute;
+	border: 0 solid transparent;
+	border-top: 9px solid #ffffff;
+	border-radius: 0 20px 0;
+	width: 15px;
+	height: 30px;
+	transform: rotate(145deg);
+}
+
+.Chat__messages__message__arrow.alt:after {
+	transform: rotate(45deg) scaleY(-1);
+	border-top: 9px solid #001a33;
+}
+
+.Chat__messages__message--other {
+	background: #fefefe;
+}
+
+.Chat__messages__message--self {
+	background: #001a33;
+	color: #ffffff;
+}
+
+.Chat__messages__message__time {
+	text-align: right;
+	font-size: 0.9em;
+	opacity: 0.7;
+}
+
+.Chat__compose {
+	box-sizing: border-box;
+	padding: 1rem;
+	background: #ededed;
+	display: flex;
+}
+
+.Chat__compose__input {
+	box-sizing: border-box;
+	border: none;
+	padding: 0.75rem;
+	border-radius: 0.5rem;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.Chat__compose__button {
+	border: 1px solid #c5c5c5;
+	background: none;
+	margin-left: 1rem;
+	padding: 0rem 1rem;
+	border-radius: 0.3rem;
+}
+
+.Chat__compose__button:hover {
+	cursor: pointer;
+}
+
+/* Lodin */
+.Login {
+	background: #f3f3f3;
+	border-radius: 0.2rem;
+	border: 1px solid #d0d0d0;
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 6rem;
+	padding: 4.3rem;
+}
+
+.Login__title {
+	color: #001a33;
+	font-size: 1.45rem;
+	font-weight: bolder;
+	text-transform: capitalize;
+	margin-top: 0;
+	margin-bottom: 2.5rem;
+}
+
+.Login__button {
+	background: #001a33;
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 0.5rem;
+	color: white;
+	margin-bottom: 0.5rem;
+	width: 20rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+.Login__button:hover {
+	cursor: pointer;
+	background: #0417bb;
+}
+
+/* UserList */
+.UserList {
+	border-right: 1px solid #e0e0e0;
+	background: #fefefe;
+	height: 100%;
+	max-width: 30vw;
+	display: flex;
+	flex-direction: column;
+	cursor: not-allowed;
+}
+
+.UserList__titlebar {
+	display: flex;
+	align-items: center;
+	background: #ededed;
+	padding: 0rem 0.5rem;
+	height: 4rem;
+}
+
+.UserList__titlebar__avatar {
+	width: 3rem;
+	border-radius: 1.5rem;
+}
+
+.UserList__titlebar__logged-in-as {
+	margin: 0 0 0 0.5rem;
+}
+
+.UserList__container {
+	display: flex;
+	flex-direction: column;
+}
+
+.UserList__container__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.UserList__container__list__item {
+	display: flex;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 1rem;
+}
+
+.UserList__container__list__item--selected {
+	background: #f2f2f2;
+}
+
+.UserList__container__list__item__avatar {
+	height: 4.2rem;
+	border-radius: 2.1rem;
+	margin-right: 1rem;
+}
+
+.UserList__container__list__item__content {
+	padding: 0.5rem;
+	flex-shrink: 1;
+	overflow: hidden;
+}
+
+.UserList__container__list__item__content__name {
+	font-weight: bold;
+	margin: 0;
+}
+
+.UserList__container__list__item__content__text {
+	color: #606060;
+	margin: 0;
+	margin-top: 0.5rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.UserList__container__list__item__time {
+	color: #a0a0a0;
+	padding: 0.5rem;
+	flex-grow: 1;
+	text-align: right;
+}
+
+@media only screen and (max-width: 900px) {
+	.UserList {
+		display: none;
+	}
 }
